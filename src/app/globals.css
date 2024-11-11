@@ -1,0 +1,15 @@
+/* Importando a fonte Playfair Display do Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap");
+
+/* Aplicando a fonte no body */
+* {
+  font-family: "Playfair Display", serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Playfair Display", serif;
+  margin: 0;
+  padding: 0;
+}
