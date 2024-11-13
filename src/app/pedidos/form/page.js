@@ -11,7 +11,6 @@ import { v4 } from "uuid";
 import * as Yup from "yup";
 import InputMask from "react-input-mask";
 
-
 export default function PedidosFormPage(props) {
   const [joiaFiltrada, setJoiaFiltrada] = useState([]);
   const [doadorFiltrado, setDoadorFiltrado] = useState([]);
@@ -53,7 +52,7 @@ export default function PedidosFormPage(props) {
     renda: "",
     joia: "",
     valor: "",
-    quantidade: "",
+    parcelas: "",
   };
 
   useEffect(() => {
@@ -71,7 +70,7 @@ export default function PedidosFormPage(props) {
     joia: Yup.string().required("Campo obrigatório"),
     tipo: Yup.string().required("Campo obrigatório"),
     valor: Yup.string().required("Campo obrigatório"),
-    quantidade: Yup.number().required("Campo obrigatório"),
+    parcelas: Yup.string().required("Campo obrigatório"),
   });
 
   return (
@@ -298,18 +297,24 @@ export default function PedidosFormPage(props) {
                 </Form.Group>
 
                 <Form.Group as={Col}>
-                  <Form.Label>Quantidade:</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="quantidade"
-                    value={values.quantidade}
+                  <Form.Label>Percelas:</Form.Label>
+                  <InputMask
+                    mask="99x"
+                    value={values.parcelas}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    isValid={touched.quantidade && !errors.quantidade}
-                    isInvalid={touched.quantidade && errors.quantidade}
-                  />
+                  >
+                    {(inputProps) => (
+                      <Form.Control
+                        {...inputProps}
+                        name="parcelas"
+                        isValid={touched.parcelas && !errors.parcelas}
+                        isInvalid={touched.parcelas && errors.parcelas}
+                      />
+                    )}
+                  </InputMask>
                   <Form.Control.Feedback type="invalid">
-                    {errors.quantidade}
+                    {errors.parcelas}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>

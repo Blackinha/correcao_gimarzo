@@ -74,6 +74,15 @@ export default function DoadoresFormPage(props) {
     preferencia: Yup.string().required("Campo obrigatório"),
   });
 
+  function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
   return (
     <Pagina titulo={"Cadastro Doador"}>
       {/* Formulário */}
@@ -100,18 +109,20 @@ export default function DoadoresFormPage(props) {
                 <Form.Group as={Col}>
                   <Form.Label>Foto:</Form.Label>
                   <Form.Control
-                    onChange={(event) =>
-                      setFieldValue(
-                        "foto.imagem",
-                        URL.createObjectURL(event.currentTarget.files[0])
-                      )
-                    }
+                    onChange={async (event) => {
+                      const file = event.currentTarget.files[0];
+                      const base64 = await convertToBase64(file);
+                      setFieldValue("foto.imagem", base64);
+                    }}
                     type="file"
                     name="foto.imagem"
                     onBlur={handleBlur}
                     isValid={touched.foto?.imagem && !errors.foto?.imagem}
                     isInvalid={touched.foto?.imagem && errors.foto?.imagem}
                   />
+                  {values.foto.imagem && (
+                    <img src={values.foto.imagem} alt="Preview" width="100" />
+                  )}
                   <Form.Control.Feedback type="invalid">
                     {errors.foto?.imagem}
                   </Form.Control.Feedback>

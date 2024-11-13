@@ -1,0 +1,43 @@
+/* Navbar */
+.navbar {
+  background-color: var(--white);
+  border-bottom: 2px solid var(--gold-metallic);
+}
+
+.navbarBrand {
+  color: var(--gold-metallic) !important;
+  font-weight: bold;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navLink {
+  color: var(--dark-gray) !important;
+}
+
+.navLink:hover {
+  color: var(--gold-metallic) !important;
+}
+
+/* Título da página */
+.titleWrapper {
+  padding-bottom: 1rem;
+}
+
+.title {
+  color: var(--petroleum-blue);
+  font-size: 2rem;
+  border-bottom: 2px solid var(--gold-metallic);
+  padding-bottom: 0.5rem;
+}
+
+/* Conteúdo da página */
+.contentContainer {
+  padding: 1rem;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

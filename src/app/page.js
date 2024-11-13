@@ -3,6 +3,7 @@
 import Pagina from "@/components/Pagina";
 import React from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
+import styles from "./page.module.css"; // Importando o CSS Module
 
 const doadores = JSON.parse(localStorage.getItem("doadores")) || [];
 const joias = JSON.parse(localStorage.getItem("joias")) || [];
@@ -48,31 +49,31 @@ export default function Homepage() {
         "https://hermosajewelry.com/cdn/shop/files/Hermosa_Jewelry_Team_69cfa854-5937-4a15-8920-5e6b593bb232.jpg?v=1700615650&width=2000.jpg",
     },
   ];
+
   return (
-    <>
-      <Pagina titulo="Gimarzo">
+    <Pagina titulo="Gimarzo">
+      <div className={styles.homepageWrapper}>
         <Row md={4}>
           {objeto.map((item) => (
-            <Col className="py-2">
-              <Card style={{ height: "100%", width: "100%" }}>
-                <Card.Img
-                  src={item.imagem}
-                  style={{ height: "100%", width: "100%" }}
-                ></Card.Img>
-                <Card.Body className="text-center">
-                  <Card.Title>
+            <Col className="py-2" key={item.nome}>
+              <Card className={styles.cardWrapper}>
+                <Card.Img src={item.imagem} className={styles.cardImg} />
+                <Card.Body className={styles.cardBody}>
+                  <Card.Title className={styles.cardTitle}>
                     <b>{item.nome}</b>
                   </Card.Title>
                   Cadastrados: {item.quantidade}
                 </Card.Body>
-                <Card.Footer className="text-end">
-                  <Button href={item.caminho}>Lista</Button>
+                <Card.Footer className={styles.cardFooter}>
+                  <Button href={item.caminho} className={styles.cardButton}>
+                    Lista
+                  </Button>
                 </Card.Footer>
               </Card>
             </Col>
           ))}
         </Row>
-      </Pagina>
-    </>
+      </div>
+    </Pagina>
   );
 }

@@ -1,0 +1,74 @@
+.textEnd {
+  text-align: end;
+  margin-bottom: 10px;
+}
+
+.newButton {
+  color: rgb(196, 203, 203);
+  border: none;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--dark);
+}
+
+.cardBody {
+  padding: 1rem;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--light-gray);
+  border-top: 1px solid #ddd;
+}
+
+.stockInfo {
+  font-size: 1rem;
+  color: var(--secondary);
+}
+
+.cardActions {
+  display: flex;
+  gap: 5px;
+}
+
+.buttonBase {
+  color: rgb(153, 161, 162);
+  border: none;
+}
+
+.buttonDanger {
+  background-color: rgb(250, 00, 00);
+  color: white;
+  border: none;
+}
+
+.buttonDanger:hover {
+  background-color: rgb(91, 59, 59);
+}
+
+.cardImg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

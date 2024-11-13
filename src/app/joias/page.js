@@ -1,10 +1,10 @@
 "use client";
 
 import Pagina from "@/components/Pagina";
-import React, { use } from "react";
-import { useEffect, useState } from "react";
-import { Button, Card, Col, Row, Table } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { FaEdit, FaPlusSquare, FaTrashAlt } from "react-icons/fa";
+import styles from "../Joias.module.css";
 
 export default function JoiasInicialPage() {
   const [joias, setJoias] = useState([]);
@@ -26,31 +26,42 @@ export default function JoiasInicialPage() {
 
   return (
     <Pagina titulo="Jóias">
-      <div className="text-end mb-2">
-        <Button href="/joias/form">
+      <div className={styles.textEnd}>
+        <Button href="/joias/form" className={styles.newButton}>
           <FaPlusSquare /> Novo
         </Button>
       </div>
 
-      <Row md={4}>
+      <Row md={3} className={styles.cardRow}>
         {joias.map((joia) => {
           return (
-            <Card className="text-center m-2" as={Col}>
-              <Card.Title>
+            <Card
+              className={`${styles.card} text-center m-2`}
+              as={Col}
+              key={joia.id}
+            >
+              <Card.Title className={styles.cardTitle}>
                 {joia.tipo}: {joia.nome}
               </Card.Title>
-              <Card.Body>
+              <Card.Body className={styles.cardBody}>
                 <Card.Img style={{ width: "100%" }} src={joia.foto.imagem} />
               </Card.Body>
-              <Card.Footer className="text-end">
-                {joia.estoque}
-                <br></br>
-                <Button className="me-2" href={`/joias/form?id=${joia.id}`}>
-                  <FaEdit />
-                </Button>
-                <Button variant="danger" onClick={() => apagar(joia)}>
-                  <FaTrashAlt />
-                </Button>
+              <Card.Footer className={styles.cardFooter}>
+                <div className={styles.stockInfo}>Estoque: {joia.estoque}</div>
+                <div className={styles.cardActions}>
+                  <Button
+                    className={`${styles.buttonBase} me-2`}
+                    href={`/joias/form?id=${joia.id}`}
+                  >
+                    <FaEdit />
+                  </Button>
+                  <Button
+                    className={styles.buttonDanger}
+                    onClick={() => apagar(joia)}
+                  >
+                    <FaTrashAlt />
+                  </Button>
+                </div>
               </Card.Footer>
             </Card>
           );

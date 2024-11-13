@@ -63,6 +63,15 @@ export default function JoiasFormPage(props) {
     doador: Yup.string().required("Campo Obrigatório"),
   });
 
+  function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
   return (
     <Pagina titulo={"Cadastro Jóias"}>
       {/* Formulário */}
@@ -105,12 +114,11 @@ export default function JoiasFormPage(props) {
                 <Form.Group as={Col}>
                   <Form.Label>Foto:</Form.Label>
                   <Form.Control
-                    onChange={(event) =>
-                      setFieldValue(
-                        "foto.imagem",
-                        URL.createObjectURL(event.currentTarget.files[0])
-                      )
-                    }
+                    onChange={async (event) => {
+                      const file = event.currentTarget.files[0];
+                      const base64 = await convertToBase64(file);
+                      setFieldValue("foto.imagem", base64);
+                    }}
                     type="file"
                     name="foto.imagem"
                     onBlur={handleBlur}
@@ -165,16 +173,21 @@ export default function JoiasFormPage(props) {
                 <Form.Group as={Col}>
                   <Form.Label>Valor Estimado:</Form.Label>
                   <InputMask
-                    maskPlaceholder="R$ 999,99"
+                    mask="R$ 999,99"
                     value={values.valorEstimado}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   >
-                    <Form.Control
-                      name="valorEstimado"
-                      isValid={touched.valorEstimado && !errors.valorEstimado}
-                      isInvalid={touched.valorEstimado && errors.valorEstimado}
-                    />
+                    {(inputProps) => (
+                      <Form.Control
+                        {...inputProps}
+                        name="valorEstimado"
+                        isValid={touched.valorEstimado && !errors.valorEstimado}
+                        isInvalid={
+                          touched.valorEstimado && errors.valorEstimado
+                        }
+                      />
+                    )}
                   </InputMask>
                   <Form.Control.Feedback type="invalid">
                     {errors.valorEstimado}

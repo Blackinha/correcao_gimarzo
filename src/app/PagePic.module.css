@@ -1,0 +1,61 @@
+.tableWrapper {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--ivory);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: var(--light-gray);
+  font-weight: bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-actions button {
+  margin: 0 5px;
+}
+
+.text-end .btn {
+  margin-top: 10px;
+}
+
+.noImageText {
+  font-style: italic;
+  color: var(--gray);
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

@@ -9,7 +9,15 @@
 }
 
 body {
+  background-color: var(--ivory);
+  color: var(--dark-gray);
   font-family: "Playfair Display", serif;
-  margin: 0;
-  padding: 0;
+}
+
+:root {
+  --gold-metallic: #d4af37;
+  --dark-gray: #2e2e2e;
+  --white: #ffffff;
+  --ivory: #f5f5dc;
+  --petroleum-blue: #34495e;
 }

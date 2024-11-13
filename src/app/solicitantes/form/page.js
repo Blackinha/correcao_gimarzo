@@ -78,6 +78,15 @@ export default function solicitantesFormPage(props) {
     joia: Yup.string().required("Campo Obrigatório"),
   });
 
+  function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
   return (
     <Pagina titulo={"Cadastro Solicitantes"}>
       {/* Formulário */}
@@ -119,12 +128,11 @@ export default function solicitantesFormPage(props) {
                 <Form.Group as={Col}>
                   <Form.Label>Foto:</Form.Label>
                   <Form.Control
-                    onChange={(event) =>
-                      setFieldValue(
-                        "foto.imagem",
-                        URL.createObjectURL(event.currentTarget.files[0])
-                      )
-                    }
+                    onChange={async (event) => {
+                      const file = event.currentTarget.files[0];
+                      const base64 = await convertToBase64(file);
+                      setFieldValue("foto.imagem", base64);
+                    }}
                     type="file"
                     name="foto.imagem"
                     onBlur={handleBlur}
@@ -201,16 +209,19 @@ export default function solicitantesFormPage(props) {
                 <Form.Group as={Col}>
                   <Form.Label>Renda:</Form.Label>
                   <InputMask
-                    maskPlaceholder="R$ 999,99"
+                    mask="R$ 999,99"
                     value={values.renda}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   >
-                    <Form.Control
-                      name="renda"
-                      isValid={touched.renda && !errors.renda}
-                      isInvalid={touched.renda && errors.renda}
-                    />
+                    {(inputProps) => (
+                      <Form.Control
+                        {...inputProps}
+                        name="renda"
+                        isValid={touched.renda && !errors.renda}
+                        isInvalid={touched.renda && errors.renda}
+                      />
+                    )}
                   </InputMask>
                   <Form.Control.Feedback type="invalid">
                     {errors.renda}
